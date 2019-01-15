@@ -34,16 +34,28 @@ export const constantRouterMap = [
     hidden: true,
     children: [{
       path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
+      component: () => import('@/views/dashboard/index'),
+      meta: {
+        title: '首页'
+      }
     }]
   },
-
+  {
+    path: 'home',
+    component: Layout,
+    children: [
+      {
+        path: '/dashboard',
+        meta: { title: '首页', icon: 'link' }
+      }
+    ]
+  },
   {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    meta: { title: '终端', icon: 'example' },
     children: [
       {
         path: 'table',
@@ -59,7 +71,6 @@ export const constantRouterMap = [
       }
     ]
   },
-
   {
     path: '/form',
     component: Layout,
@@ -68,7 +79,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: '商户', icon: 'form' }
       }
     ]
   },
@@ -79,7 +90,7 @@ export const constantRouterMap = [
     redirect: '/nested/menu1',
     name: 'Nested',
     meta: {
-      title: 'Nested',
+      title: '商品',
       icon: 'nested'
     },
     children: [
@@ -130,18 +141,82 @@ export const constantRouterMap = [
       }
     ]
   },
-
+  // 礼品 // 充值 // 用户  // 统计 设置
   {
-    path: 'external-link',
+    path: '/example1',
     component: Layout,
+    redirect: '/example1/table',
+    name: 'Example1',
+    meta: { title: '礼品', icon: 'example' },
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'table',
+        name: 'Table1',
+        component: () => import('@/views/table/index'),
+        meta: { title: '礼品', icon: 'table' }
       }
     ]
   },
-
+  {
+    path: '/example2',
+    component: Layout,
+    redirect: '/example2/table',
+    name: 'Example2',
+    meta: { title: '充值', icon: 'example' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table2',
+        component: () => import('@/views/table/index'),
+        meta: { title: '充值', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '/example3',
+    component: Layout,
+    redirect: '/example3/table',
+    name: 'Example3',
+    meta: { title: '统计', icon: 'example' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table3',
+        component: () => import('@/views/table/index'),
+        meta: { title: '统计', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '/example4',
+    component: Layout,
+    redirect: '/example4/table',
+    name: 'Example4',
+    meta: { title: '用户', icon: 'example' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table4',
+        component: () => import('@/views/table/index'),
+        meta: { title: '用户', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '/example5',
+    component: Layout,
+    redirect: '/example5/table',
+    name: 'Example5',
+    meta: { title: '设置', icon: 'example' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table5',
+        component: () => import('@/views/table/index'),
+        meta: { title: '设置', icon: 'table' }
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

@@ -1,7 +1,8 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
     <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
-    <breadcrumb />
+    <div class="logo">趣电丸管理后台</div>
+    <!-- <small><breadcrumb style="float:right; padding-right:80px;" /></small> -->
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
         <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
@@ -10,11 +11,11 @@
       <el-dropdown-menu slot="dropdown" class="user-dropdown">
         <router-link class="inlineBlock" to="/">
           <el-dropdown-item>
-            Home
+            修改密码
           </el-dropdown-item>
         </router-link>
         <el-dropdown-item divided>
-          <span style="display:block;" @click="logout">LogOut</span>
+          <span style="display:block;" @click="logout">退出</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -60,6 +61,13 @@ export default {
     height: 50px;
     float: left;
     padding: 0 10px;
+  }
+  .logo {
+    line-height: 50px;
+    height: 50px;
+    float: left;
+    padding: 0 10px;
+    font-weight:bold;
   }
   .screenfull {
     position: absolute;
