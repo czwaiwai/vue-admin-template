@@ -1,0 +1,146 @@
+// tool -- css
+.clearfix {
+    *zoom: 1;
+    &:before,
+    &:after {
+      display: table;
+      line-height: 0;
+      content: "";
+    }
+    &:after {
+      clear: both;
+    }
+  }
+  .dot {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .inline-block{
+    display:inline-block;
+  }
+  .vertical-top{
+    vertical-align:top;
+  }
+  .vertical-middle{
+    vertical-align:middle;
+  }
+  .vertical-bottom{
+    vertical-align:bottom;
+  }
+  .normal{
+    font-weight:normal;
+  }
+  .bold {
+    font-weight:bold;
+  }
+  .relative{
+    position:relative;
+  }
+  .no-padding{
+    padding:0 !important;
+  }
+  .no-margin {
+    margin:0 !important;
+  }
+  
+  $direction:('top','left','right','bottom');
+  $distance:('5','10','15','20');
+  $text-position:('left','right','center');
+  @mixin distanceBy($dis,$size) {
+    @if($size == '10') {
+      .#{$dis}{
+        #{$dis}:#{$size}px;
+      }
+      .#{$dis}-h{
+        #{$dis}-left:#{$size}px;
+        #{$dis}-right:#{$size}px;
+      }
+      .#{$dis}-v{
+        #{$dis}-top:#{$size}px;
+        #{$dis}-bottom:#{$size}px;
+      }
+    } @else {
+      .#{$dis}#{$size}{
+        #{$dis}:#{$size}px;
+      }
+      .#{$dis}#{$size}-h{
+        #{$dis}-left:#{$size}px;
+        #{$dis}-right:#{$size}px;
+      }
+      .#{$dis}#{$size}-v{
+        #{$dis}-top:#{$size}px;
+        #{$dis}-bottom:#{$size}px;
+      }
+    }
+  }
+  @for $i from 0 to length($distance) {
+    @include distanceBy('margin',nth($distance,$i+1));
+    @include distanceBy('padding',nth($distance,$i+1));
+  }
+  
+  @for $i from 0 to length($text-position) {
+    .text-#{nth($text-position,$i+1)}{
+      text-align:#{nth($text-position,$i+1)}
+    }
+  }
+  
+  @for $i from 0 to length($direction) {
+    .border-#{nth($direction,$i+1)} {
+      border-#{nth($direction,$i+1)}: 1px solid #e3e3e3;
+    }
+    @for $j from 0 to length($distance) {
+      @if nth($distance, $j+1) == '10' {
+        .padding-#{nth($direction,$i+1)}{
+          padding-#{nth($direction,$i+1)}:#{nth($distance, $j+1)}px;
+        }
+        .margin-#{nth($direction,$i+1)}{
+          margin-#{nth($direction,$i+1)}:#{nth($distance,$j+1)}px;
+        }
+      } @else {
+        .padding-#{nth($direction,$i+1)}#{nth($distance,$j+1)} {
+          padding-#{nth($direction,$i+1)}:#{nth($distance, $j+1)}px;
+        }
+        .margin-#{nth($direction,$i+1)}#{nth($distance,$j+1)}{
+          margin-#{nth($direction,$i+1)}:#{nth($distance,$j+1)}px;
+        }
+      }
+    }
+  }
+  
+  @for $i from 10 through 28{
+    .fs#{$i}{
+      font-size:#{$i}px;
+    }
+  }
+  .float_left{
+    float:left;
+  }
+  .float_right{
+    float: right;
+  }
+  
+  .flex_box{
+    display: flex;
+  }
+  .flex_item{
+    flex: 1;
+  }
+  .flex_direction_column{
+    flex-direction: column;
+  }
+  .flex_direction_row{
+    flex-direction:row;
+  }
+  .flex_center{
+    justify-content:center;
+  }
+  .flex_self_center{
+    align-self: center;
+  }
+  .overflow_auto{
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  

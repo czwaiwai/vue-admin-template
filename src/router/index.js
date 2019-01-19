@@ -51,172 +51,180 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/example',
+    path: '/terminal',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
+    redirect: '/terminal/info',
+    name: 'Terminal',
     meta: { title: '终端', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'info',
+        name: 'TerminalInfo',
+        component: () => import('@/views/terminal/info'),
+        meta: { title: '终端信息', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'manage',
+        name: 'TerminalManage',
+        component: () => import('@/views/terminal/manage'),
+        meta: { title: '终端管理', icon: 'table' }
       }
+      // {
+      //   path: 'table',
+      //   name: 'Table',
+      //   component: () => import('@/views/table/index'),
+      //   meta: { title: 'Table', icon: 'table' }
+      // },
+      // {
+      //   path: 'tree',
+      //   name: 'Tree',
+      //   component: () => import('@/views/tree/index'),
+      //   meta: { title: 'Tree', icon: 'tree' }
+      // }
     ]
   },
   {
-    path: '/form',
+    path: '/merchant',
     component: Layout,
+    redirect: '/merchant/info',
+    name: 'Merchant',
+    meta: { title: '商户', icon: 'example' },
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '商户', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: '商品',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'manage',
+        name: 'MerchantManage',
+        component: () => import('@/views/merchant/manage'),
+        meta: { title: '商户管理', icon: 'table' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
+        path: 'shop',
+        name: 'MerchantShop',
+        component: () => import('@/views/merchant/shop'),
+        meta: { title: '门店管理', icon: 'table' }
+      },
+      {
+        path: 'brand',
+        name: 'MerchantBrand',
+        component: () => import('@/views/merchant/brand'),
+        meta: { title: '品牌空间', icon: 'table' }
       }
     ]
   },
-  // 礼品 // 充值 // 用户  // 统计 设置
   {
-    path: '/example1',
+    path: '/product',
     component: Layout,
-    redirect: '/example1/table',
-    name: 'Example1',
+    redirect: '/product/manage',
+    name: 'Product',
+    meta: { title: '商品', icon: 'example' },
+    children: [
+      {
+        path: 'manage',
+        name: 'ProductManage',
+        component: () => import('@/views/product/manage'),
+        meta: { title: '商品管理', icon: 'table' }
+      },
+      {
+        path: 'orders',
+        name: 'ProductOrders',
+        component: () => import('@/views/product/orders'),
+        meta: { title: '订单管理', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '/gift',
+    component: Layout,
+    redirect: '/gift/manage',
+    name: 'Gift',
     meta: { title: '礼品', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table1',
-        component: () => import('@/views/table/index'),
-        meta: { title: '礼品', icon: 'table' }
+        path: 'manage',
+        name: 'GiftManage',
+        component: () => import('@/views/gift/manage'),
+        meta: { title: '礼品管理', icon: 'table' }
+      },
+      {
+        path: 'exchange',
+        name: 'GiftExchange',
+        component: () => import('@/views/gift/exchange'),
+        meta: { title: '礼品兑换', icon: 'table' }
       }
     ]
   },
   {
-    path: '/example2',
+    path: '/recharge',
     component: Layout,
-    redirect: '/example2/table',
-    name: 'Example2',
+    redirect: '/recharge/index',
+    name: 'Recharge',
     meta: { title: '充值', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table2',
-        component: () => import('@/views/table/index'),
+        path: 'index',
+        name: 'rechargeIndex',
+        component: () => import('@/views/recharge/index'),
         meta: { title: '充值', icon: 'table' }
       }
     ]
   },
   {
-    path: '/example3',
+    path: '/users',
     component: Layout,
-    redirect: '/example3/table',
-    name: 'Example3',
+    redirect: '/users/index',
+    name: 'Users',
+    meta: { title: '用户', icon: 'example' },
+    children: [
+      {
+        path: 'index',
+        name: 'usersIndex',
+        component: () => import('@/views/users/index'),
+        meta: { title: '用户', icon: 'table' }
+      }
+    ]
+  },
+
+  {
+    path: '/statistical',
+    component: Layout,
+    redirect: '/statistical/index',
+    name: 'Statistical',
     meta: { title: '统计', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table3',
-        component: () => import('@/views/table/index'),
+        path: 'index',
+        name: 'statisticalIndex',
+        component: () => import('@/views/statistical/index'),
         meta: { title: '统计', icon: 'table' }
       }
     ]
   },
   {
-    path: '/example4',
+    path: '/settings',
     component: Layout,
-    redirect: '/example4/table',
-    name: 'Example4',
-    meta: { title: '用户', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table4',
-        component: () => import('@/views/table/index'),
-        meta: { title: '用户', icon: 'table' }
-      }
-    ]
-  },
-  {
-    path: '/example5',
-    component: Layout,
-    redirect: '/example5/table',
-    name: 'Example5',
+    redirect: '/settings/index',
+    name: 'Settings',
     meta: { title: '设置', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table5',
-        component: () => import('@/views/table/index'),
+        path: 'settings',
+        name: 'settingsIndex',
+        component: () => import('@/views/settings/index'),
         meta: { title: '设置', icon: 'table' }
       }
     ]
   },
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: '商户', icon: 'form' }
+  //     }
+  //   ]
+  // },
   { path: '*', redirect: '/404', hidden: true }
 ]
 
