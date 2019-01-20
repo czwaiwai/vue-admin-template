@@ -10,34 +10,34 @@
       border
       fit
       highlight-current-row>
-      <el-table-column align="center" label="ID" width="95">
+      <!-- <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
           {{ scope.$index }}
         </template>
-      </el-table-column>
-      <el-table-column label="日期">
+      </el-table-column> -->
+      <el-table-column label="日期" width="200" >
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.createTime }}
         </template>
       </el-table-column>
       <el-table-column label="商品销量" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          ¥<span>{{ scope.row.num }}</span>
         </template>
       </el-table-column>
       <el-table-column label="平台营收" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          ¥<span>{{ scope.row.num }}</span>
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="门店收益" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          ¥<span>{{ scope.row.num }}</span>
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="流水" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          ¥<span>{{ scope.row.num }}</span>
         </template>
       </el-table-column>
     </el-table>

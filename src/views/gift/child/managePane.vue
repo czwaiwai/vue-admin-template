@@ -10,50 +10,53 @@
       border
       fit
       highlight-current-row>
-      <el-table-column align="center" label="ID" width="95">
+      <!-- <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
           {{ scope.$index }}
         </template>
-      </el-table-column>
-      <el-table-column label="礼品图">
+      </el-table-column> -->
+      <el-table-column label="礼品图" width="95">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          <div class="img_wrap60 text-center inline-block">
+            <img :src="scope.row.image">
+          </div>
         </template>
       </el-table-column>
-      <el-table-column label="名称（id）" width="110" align="center">
+      <el-table-column label="名称（id）" min-width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <p><span>{{ scope.row.title }}</span><br >
+          <span>{{ scope.row.id }}</span></p>
         </template>
       </el-table-column>
       <el-table-column label="成本" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          ¥ {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="售价" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          ¥ {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="单件利润（平台）" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          ¥ {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="已分配门店" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="可分配库存" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="添加时间" width="200">
         <template slot-scope="scope">
           <i class="el-icon-time"/>
-          <span>{{ scope.row.display_time }}</span>
+          <span>{{ scope.row.createTime }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">

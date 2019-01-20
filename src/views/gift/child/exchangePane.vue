@@ -10,39 +10,39 @@
       border
       fit
       highlight-current-row>
-      <el-table-column align="center" label="ID" width="95">
+      <!-- <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
           {{ scope.$index }}
         </template>
-      </el-table-column>
-      <el-table-column label="门店号">
+      </el-table-column> -->
+      <el-table-column label="门店号" width="95">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.no }}
         </template>
       </el-table-column>
-      <el-table-column label="门店名称" width="110" align="center">
+      <el-table-column label="门店名称" min-width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <span>{{ scope.row.title }}</span>
         </template>
       </el-table-column>
       <el-table-column label="今日兑换" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="昨日兑换" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="总垫还" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="剩余可兑换" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">

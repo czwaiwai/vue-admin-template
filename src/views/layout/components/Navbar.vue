@@ -2,7 +2,7 @@
   <el-menu class="navbar" mode="horizontal">
     <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
     <div class="logo">趣电丸管理后台</div>
-    <small><breadcrumb /></small>
+    <small style="outline: none;"><breadcrumb /></small>
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
         <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">

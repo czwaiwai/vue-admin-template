@@ -10,35 +10,37 @@
       border
       fit
       highlight-current-row>
-      <el-table-column align="center" label="ID" width="95">
+      <!-- <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
           {{ scope.$index }}
         </template>
-      </el-table-column>
-      <el-table-column label="型号">
+      </el-table-column> -->
+      <el-table-column label="型号" width="110">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.id }}
         </template>
       </el-table-column>
       <el-table-column label="终端图" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <div class="img_wrap60 text-center inline-block">
+            <img :src="scope.row.image">
+          </div>
         </template>
       </el-table-column>
       <el-table-column label="终端名称" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          {{ scope.row.title }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="功能描述" width="110" align="center">
+      <el-table-column class-name="status-col" label="功能描述" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          <p class="line-clamp2">{{ scope.row.content }}</p>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
+      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <i class="el-icon-time"/>
-          <span>{{ scope.row.display_time }}</span>
+          <el-button type="primary" size="mini" >编辑</el-button>
+          <el-button v-if="scope.row.status!='published'" size="mini" type="success" >查看</el-button>
         </template>
       </el-table-column>
     </el-table>

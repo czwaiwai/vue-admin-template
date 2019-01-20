@@ -10,43 +10,43 @@
       border
       fit
       highlight-current-row>
-      <el-table-column align="center" label="ID" width="95">
+      <!-- <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
           {{ scope.$index }}
         </template>
-      </el-table-column>
-      <el-table-column label="门店号">
+      </el-table-column> -->
+      <el-table-column label="门店号" width="110">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.id }}
         </template>
       </el-table-column>
       <el-table-column label="门店名称" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <span>{{ scope.row.title }}</span>
         </template>
       </el-table-column>
       <el-table-column label="终端数" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="商品数" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          {{ scope.row.num }}
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="礼品数" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          {{ scope.row.num }}
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="添加时间" width="200">
+      <el-table-column align="center" prop="createTime" label="添加时间" width="200">
         <template slot-scope="scope">
           <i class="el-icon-time"/>
-          <span>{{ scope.row.display_time }}</span>
+          <span>{{ scope.row.createTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="440" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" >终端</el-button>
           <el-button type="primary" size="mini" >商品</el-button>
