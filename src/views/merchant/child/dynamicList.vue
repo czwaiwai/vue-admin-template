@@ -45,7 +45,7 @@
       </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
-    <dynamic-detail :visible.sync="detailVisible" :form-obj="itemObj" /></dynamic-detail>
+    <dynamic-detail :visible.sync="detailVisible" :form-obj="itemObj" />
   </div>
 
 </template>
