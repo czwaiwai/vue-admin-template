@@ -4,7 +4,7 @@
     <div class="tab-container">
       <el-tabs v-model="activeName" >
         <el-tab-pane v-for="item in tabMapOptions" :label="item.label" :key="item.key" :name="item.key">
-          <component v-if="activeName===item.key" :is="activeName"/>
+          <component v-if="activeName===item.key" :tab="currTab" :is="activeName"/>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -31,7 +31,11 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    currTab() {
+      return this.tabMapOptions.find(item => item.key === this.activeName)
+    }
+  },
 
   created() {},
 

@@ -9,7 +9,17 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/upload': {
+        target: 'https://www.easy-mock.com/mock/5c44300eb67adb1e17651b54/vue-admin/upload',
+        changeOrigin: true,
+        secure: false,
+        headers: {
+          Referer: 'https://www.easy-mock.com.com'
+        }
+      }
+      // '/upload': "https://www.easy-mock.com/mock/5c44300eb67adb1e17651b54/vue-admin/upload"
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

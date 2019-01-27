@@ -33,7 +33,7 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="$emit('update:visible', false)">取消</el-button>
+      <el-button @click="modalClose">取消</el-button>
       <el-button type="primary" @click="createOrUpdate()">确定</el-button>
     </div>
   </el-dialog>
@@ -83,14 +83,17 @@ export default {
   computed: {},
 
   created() {
-
+    this.copyform = this.ruleForm
   },
 
   methods: {
     modalOpen() {
-      if (!this.isCreate) {
-        this.ruleForm = { ...this.ruleForm, ...this.formObj }
-      }
+      this.ruleForm = { ...this.copyform }
+      this.$nextTick(() => {
+        if (!this.isCreate) {
+          this.ruleForm = { ...this.copyform, ...this.formObj }
+        }
+      })
       console.log('打开了')
     },
     validateForm() {
@@ -120,6 +123,7 @@ export default {
       }
     },
     modalClose() {
+      console.log('关闭了')
       this.$refs['ruleForm'].resetFields()
       this.$emit('update:visible', false)
     },

@@ -1,7 +1,10 @@
 <template>
   <div class="">
     <div class="filter-container">
-      <el-button type="primary" size="medium" icon="el-icon-edit" @click="addVisible=true" >添加</el-button>
+      <el-input v-model="listQuery.search" placeholder="请输入订单号" class="input-with-select">
+        <el-button slot="append" icon="el-icon-search" @click="searchHandle" />
+      </el-input>
+      <!-- <el-button type="primary" size="medium" icon="el-icon-edit" @click="addVisible=true" >添加</el-button> -->
     </div>
     <el-table
       v-loading="listLoading"
@@ -56,19 +59,19 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" >发货</el-button>
-          <el-button v-if="scope.row.status!='published'" size="mini" type="success" >查看</el-button>
+          <el-button v-if="tab.key === 'tabPane4'" type="primary" size="mini" @click="sendPostHandle(scope.row)">发货</el-button>
+          <el-button size="mini" type="success" @click="viewHandle(scope.row)" >查看</el-button>
         </template>
       </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
-    <add :visible.sync="addVisible" />
+    <send-post-modal :visible.sync="sendPostVisible" :form-obj="itemObj"/>
   </div>
 </template>
 
 <script>
 import { getList } from '@/api/table'
-import Add from './add'
+import SendPostModal from './orders/sendPost'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 
 export default {
@@ -83,15 +86,25 @@ export default {
     }
   },
   components: {
-    Add,
+    SendPostModal,
     Pagination
+  },
+  props: {
+    tab: {
+      type: Object,
+      default: () => {}
+    }
   },
   data() {
     return {
+      isCreate: true,
       addVisible: false,
+      sendPostVisible: false,
+      itemObj: {},
       listQuery: {
         page: 1,
         limit: 20,
+        search: '',
         importance: undefined,
         title: undefined,
         type: undefined,
@@ -114,6 +127,23 @@ export default {
         this.total = response.data.total || 100
         this.listLoading = false
       })
+    },
+    searchHandle() {
+      this.fetchData()
+    },
+    viewHandle(item) {
+      this.$message.error('暂无视图显示')
+    },
+    // 新增
+    createHandle() {
+      this.isCreate = true
+      this.updateVisible = true
+    },
+    // 发货
+    sendPostHandle(item) {
+      this.isCreate = false
+      this.itemObj = item
+      this.sendPostVisible = true
     }
   }
 }

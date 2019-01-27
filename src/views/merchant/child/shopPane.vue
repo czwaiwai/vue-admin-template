@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="filter-container">
-      <el-button type="primary" size="medium" icon="el-icon-edit" @click="addVisible=true" >添加</el-button>
+      <el-button type="primary" size="medium" icon="el-icon-edit" @click="createHandle" >添加</el-button>
     </div>
     <el-table
       v-loading="listLoading"
@@ -48,23 +48,36 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="440" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" >终端</el-button>
-          <el-button type="primary" size="mini" >商品</el-button>
-          <el-button type="primary" size="mini" >礼品</el-button>
-          <el-button type="primary" size="mini" >活动</el-button>
-          <el-button type="primary" size="mini" >闯关</el-button>
-          <el-button size="mini" type="success" >查看</el-button>
+          <el-button type="primary" size="mini" @click="terminalHandle(scope.row)">终端</el-button>
+          <el-button type="primary" size="mini" @click="goodHandle(scope.row)">商品</el-button>
+          <el-button type="primary" size="mini" @click="giftHandle(scope.row)">礼品</el-button>
+          <el-button type="primary" size="mini" @click="activityHandle(scope.row)">活动</el-button>
+          <el-button type="primary" size="mini" @click="gameHandle(scope.row)">闯关</el-button>
+          <el-button size="mini" type="success" @click="viewHandle(scope.row)" >查看</el-button>
         </template>
       </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
-    <add :visible.sync="addVisible" />
+    <update-modal :visible.sync="updateVisible" :is-create="isCreate" :form-obj="itemObj"/>
+    <detail-modal :visible.sync="detailVisible" :form-obj="itemObj"/>
+    <game-modal :visible.sync="gameVisible" :is-create="isCreate" :form-obj="itemObj"/>
+    <activity-modal :visible.sync="activityVisible" :form-obj="itemObj"/>
+    <terminal-modal :visible.sync="terminalVisible" :form-obj="itemObj"/>
+    <good-modal :visible.sync="goodVisible" :form-obj="itemObj"/>
+    <gift-modal :visible.sync="giftVisible" :form-obj="itemObj"/>
   </div>
 </template>
 
 <script>
 import { getList } from '@/api/table'
-import Add from './add'
+import { del } from '@/api/form.js'
+import UpdateModal from './shop/update'
+import DetailModal from './shop/detail'
+import ActivityModal from './shop/activityList'
+import TerminalModal from './shop/terminalList'
+import GiftModal from './shop/giftList'
+import GoodModal from './shop/goodList'
+import GameModal from './shop/game'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 
 export default {
@@ -79,12 +92,27 @@ export default {
     }
   },
   components: {
-    Add,
-    Pagination
+    Pagination,
+    UpdateModal,
+    DetailModal,
+    ActivityModal,
+    TerminalModal,
+    GiftModal,
+    GoodModal,
+    GameModal
   },
   data() {
     return {
       addVisible: false,
+      isCreate: true,
+      updateVisible: false,
+      detailVisible: false,
+      activityVisible: false,
+      terminalVisible: false,
+      goodVisible: false,
+      gameVisible: false,
+      giftVisible: false,
+      itemObj: {},
       listQuery: {
         page: 1,
         limit: 20,
@@ -110,6 +138,66 @@ export default {
         this.total = response.data.total || 100
         this.listLoading = false
       })
+    },
+    // 新增
+    createHandle() {
+      this.isCreate = true
+      this.updateVisible = true
+    },
+    // 修改
+    updateHandle(item) {
+      this.isCreate = false
+      this.itemObj = item
+      this.updateVisible = true
+    },
+    // 闯关游戏难度设置
+    gameHandle(item) {
+      this.isCreate = false
+      this.itemObj = item
+      this.gameVisible = true
+    },
+    // 活动
+    activityHandle(item) {
+      this.isCreate = false
+      this.itemObj = item
+      this.activityVisible = true
+    },
+    // 终端
+    terminalHandle(item) {
+      this.isCreate = false
+      this.itemObj = item
+      this.terminalVisible = true
+    },
+    // 商品
+    goodHandle(item) {
+      this.isCreate = false
+      this.itemObj = item
+      this.goodVisible = true
+    },
+    // 礼品
+    giftHandle(item) {
+      this.isCreate = false
+      this.itemObj = item
+      this.giftVisible = true
+    },
+    // 查看
+    viewHandle(item) {
+      this.itemObj = item
+      this.detailVisible = true
+    },
+    // 上架
+    async upHandle(item) {
+      await this.$confirm('你确定要上架么？')
+      const res = await del(item.id)
+      item.bool = false
+      this.$message.success(res.msg)
+    },
+    // 下架
+    async downHandle(item) {
+      await this.$confirm('你确定要下架么？')
+      const res = await del(item.id)
+      item.bool = true
+      this.$message.success(res.msg)
     }
   }
 }

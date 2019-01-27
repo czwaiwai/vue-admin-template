@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="filter-container">
-      <el-button type="primary" size="medium" icon="el-icon-edit" @click="addVisible=true" >添加</el-button>
+      <!-- <el-button type="primary" size="medium" icon="el-icon-edit" @click="addVisible=true" >添加</el-button> -->
     </div>
     <el-table
       v-loading="listLoading"
@@ -20,7 +20,7 @@
           {{ scope.row.id }}
         </template>
       </el-table-column>
-      <el-table-column label="用户头像" width="110" align="center">
+      <el-table-column label="用户头像" class-name="text-center" width="110" align="center">
         <template slot-scope="scope">
           <div class="img_wrap60 text-center inline-block">
             <img :src="scope.row.image">

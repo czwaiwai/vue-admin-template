@@ -1,7 +1,13 @@
 <template>
   <div class="">
     <div class="filter-container">
-      <el-button type="primary" size="medium" icon="el-icon-edit" @click="addVisible=true" >添加</el-button>
+      <el-date-picker
+        v-model="dateRange"
+        type="datetimerange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"/>
+      <el-button type="primary" size="medium" icon="el-icon-search" @click="searchHandle" >查询</el-button>
     </div>
     <el-table
       v-loading="listLoading"
@@ -68,6 +74,7 @@ export default {
   },
   data() {
     return {
+      dateRange: '',
       addVisible: false,
       listQuery: {
         page: 1,
@@ -94,6 +101,9 @@ export default {
         this.total = response.data.total || 100
         this.listLoading = false
       })
+    },
+    searchHandle() {
+      this.fetchData()
     }
   }
 }

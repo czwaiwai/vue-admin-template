@@ -1,6 +1,6 @@
 <!-- add.vue 创建和编辑-->
 <template>
-  <el-dialog :visible.sync="visible" :before-close="modalClose" :title="isCreate?'添加终端信息':'编辑终端信息'" @open="modalOpen" >
+  <el-dialog :visible.sync="visible" :before-close="modalClose" :title="isCreate?'闯关游戏难度设置':'闯关游戏难度设置'" @open="modalOpen" >
     <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm">
       <!-- <el-form-item label="型号" prop="region">
         <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
@@ -8,32 +8,22 @@
           <el-option label="区域二" value="beijing"/>
         </el-select>
       </el-form-item> -->
-      <el-form-item label="型号" prop="id">
-        <el-input v-model="ruleForm.id"/>
+      <el-form-item label="发射飞刀数" prop="num">
+        <el-input v-model="ruleForm.num"/>
       </el-form-item>
-      <el-form-item label="终端图" prop="image">
-        <el-upload
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :auto-upload= "true"
-          :before-upload="beforeAvatarUpload"
-          class="avatar-uploader"
-          action="/upload">
-          <img v-if="ruleForm.image" :src="ruleForm.image" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"/>
-        </el-upload>
+      <el-form-item label="时间" prop="num">
+        <el-input v-model="ruleForm.num"/>
+      </el-form-item>
+      <el-form-item label="圈数" prop="num">
+        <el-input v-model="ruleForm.num"/>
+      </el-form-item>
+      <el-form-item label="炸弹数" prop="num">
+        <el-input v-model="ruleForm.num"/>
       </el-form-item>
 
-      <el-form-item label="终端名称" prop="title">
-        <el-input v-model="ruleForm.title"/>
-      </el-form-item>
-
-      <el-form-item label="功能描述" prop="content">
-        <el-input v-model="ruleForm.content" type="textarea"/>
-      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="$emit('update:visible', false)">取消</el-button>
+      <el-button @click="modalClose">取消</el-button>
       <el-button type="primary" @click="createOrUpdate()">确定</el-button>
     </div>
   </el-dialog>
@@ -63,6 +53,7 @@ export default {
         id: '',
         image: '',
         title: '',
+        short: '',
         content: ''
       },
       rules: {
@@ -83,14 +74,17 @@ export default {
   computed: {},
 
   created() {
-
+    this.copyform = this.ruleForm
   },
 
   methods: {
     modalOpen() {
-      if (!this.isCreate) {
-        this.ruleForm = { ...this.ruleForm, ...this.formObj }
-      }
+      this.ruleForm = { ...this.copyform }
+      this.$nextTick(() => {
+        if (!this.isCreate) {
+          this.ruleForm = { ...this.copyform, ...this.formObj }
+        }
+      })
       console.log('打开了')
     },
     validateForm() {

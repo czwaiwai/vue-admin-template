@@ -1,20 +1,12 @@
 <!-- detail.vue -->
 <template>
-  <el-dialog :visible.sync="visible" :before-close="modalClose" title="终端信息" >
+  <el-dialog :visible.sync="visible" :before-close="modalClose" title="查看门店" >
     <el-form ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="型号" prop="id">
-        {{ formObj.id }}
-      </el-form-item>
-      <el-form-item label="终端图" prop="image">
-        <img v-if="formObj.image" :src="formObj.image" class="avatar">
-      </el-form-item>
-
-      <el-form-item label="终端名称" prop="title">
-        {{ formObj.title }}
-      </el-form-item>
-
-      <el-form-item label="功能描述" prop="content">
+      <el-form-item label="动态详情" prop="content">
         <p>{{ formObj.content }}</p>
+      </el-form-item>
+      <el-form-item label="图片" prop="image">
+        <img v-if="formObj.image" :src="formObj.image" class="avatar">
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">

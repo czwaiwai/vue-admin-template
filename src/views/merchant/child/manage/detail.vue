@@ -5,16 +5,14 @@
       <el-form-item label="型号" prop="id">
         {{ formObj.id }}
       </el-form-item>
-      <el-form-item label="终端图" prop="image">
-        <img v-if="formObj.image" :src="formObj.image" class="avatar">
+      <el-form-item label="终端型号" prop="short">
+        <p>{{ formObj.short }}</p>
       </el-form-item>
-
       <el-form-item label="终端名称" prop="title">
         {{ formObj.title }}
       </el-form-item>
-
-      <el-form-item label="功能描述" prop="content">
-        <p>{{ formObj.content }}</p>
+      <el-form-item label="终端图" prop="image">
+        <img v-if="formObj.image" :src="formObj.image" class="avatar">
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">

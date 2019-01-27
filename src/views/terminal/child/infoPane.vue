@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="filter-container">
-      <el-button type="primary" size="medium" icon="el-icon-edit" @click="addVisible=true" >添加</el-button>
+      <el-button type="primary" size="medium" icon="el-icon-edit" @click="createHandle" >添加</el-button>
     </div>
     <el-table
       v-loading="listLoading"
@@ -39,19 +39,21 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" >编辑</el-button>
-          <el-button v-if="scope.row.status!='published'" size="mini" type="success" >查看</el-button>
+          <el-button type="primary" size="mini" @click="updateHandle(scope.row)" >编辑</el-button>
+          <el-button size="mini" type="success" @click="viewHandle(scope.row)" >查看</el-button>
         </template>
       </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
-    <add :visible.sync="addVisible" />
+    <add :visible.sync="addVisible" :is-create="isCreate" :form-obj="itemObj" />
+    <detail :visible.sync="detailVisible" :form-obj="itemObj" />
   </div>
 </template>
 
 <script>
 import { getList } from '@/api/table'
-import Add from './add'
+import Add from './info/add'
+import Detail from './info/detail'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 
 export default {
@@ -67,11 +69,15 @@ export default {
   },
   components: {
     Add,
+    Detail,
     Pagination
   },
   data() {
     return {
+      isCreate: true,
       addVisible: false,
+      detailVisible: false,
+      itemObj: {},
       listQuery: {
         page: 1,
         limit: 20,
@@ -97,6 +103,22 @@ export default {
         this.total = response.data.total || 100
         this.listLoading = false
       })
+    },
+    // 新增
+    createHandle() {
+      this.isCreate = true
+      this.addVisible = true
+    },
+    // 修改
+    updateHandle(item) {
+      this.isCreate = false
+      this.itemObj = item
+      this.addVisible = true
+    },
+    // 查看
+    viewHandle(item) {
+      this.itemObj = item
+      this.detailVisible = true
     }
   }
 }

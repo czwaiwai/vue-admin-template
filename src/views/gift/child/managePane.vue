@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="filter-container">
-      <el-button type="primary" size="medium" icon="el-icon-edit" @click="addVisible=true" >添加</el-button>
+      <el-button type="primary" size="medium" icon="el-icon-edit" @click="goodsHandle" >添加</el-button>
     </div>
     <el-table
       v-loading="listLoading"
@@ -61,20 +61,25 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" >分配</el-button>
-          <el-button type="primary" size="mini" >下架</el-button>
+          <el-button type="primary" size="mini" @click="allotHandle(scope.row)">分配</el-button>
+          <el-button type="danger" size="mini" @click="downHandle(scope.row)" >下架</el-button>
         </template>
       </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
-    <add :visible.sync="addVisible" />
+    <!-- <add :visible.sync="addVisible" /> -->
+    <allot-modal :visible.sync="allotVisible" :form-obj="itemObj"/>
+    <goods-modal :visible.sync="goodsVisible" />
   </div>
 </template>
 
 <script>
 import { getList } from '@/api/table'
 import Add from './add'
+import AllotModal from './manage/allotList'
+import GoodsModal from './manage/goodsList'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+import { del } from '@/api/form.js'
 
 export default {
   filters: {
@@ -89,11 +94,23 @@ export default {
   },
   components: {
     Add,
+    AllotModal,
+    GoodsModal,
     Pagination
+  },
+  props: {
+    tab: {
+      type: Object,
+      default: () => {}
+    }
   },
   data() {
     return {
       addVisible: false,
+      isCreate: true,
+      itemObj: {},
+      goodsVisible: false,
+      allotVisible: false,
       listQuery: {
         page: 1,
         limit: 20,
@@ -119,6 +136,24 @@ export default {
         this.total = response.data.total || 100
         this.listLoading = false
       })
+    },
+    // 分配
+    allotHandle(item) {
+      this.isCreate = false
+      this.itemObj = item
+      this.allotVisible = true
+    },
+    // 从商品库中挑选商品
+    goodsHandle() {
+      this.isCreate = false
+      // this.itemObj = item
+      this.goodsVisible = true
+    },
+    // 下架
+    async downHandle(item) {
+      await this.$confirm('你确定要下架么？')
+      const res = await del(item.id)
+      this.$message.success(res.msg)
     }
   }
 }

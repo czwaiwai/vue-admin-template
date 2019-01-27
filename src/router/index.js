@@ -106,7 +106,16 @@ export const constantRouterMap = [
         path: 'brand',
         name: 'MerchantBrand',
         component: () => import('@/views/merchant/brand'),
-        meta: { title: '品牌空间', icon: 'table' }
+        meta: { title: '品牌空间', icon: 'table' },
+        children: [
+          {
+            path: 'list',
+            hidden: true,
+            name: 'dynamicList',
+            component: () => import('@/views/merchant/child/dynamicList'),
+            meta: { title: '动态列表', icon: 'table' }
+          }
+        ]
       }
     ]
   },
@@ -121,7 +130,16 @@ export const constantRouterMap = [
         path: 'manage',
         name: 'ProductManage',
         component: () => import('@/views/product/manage'),
-        meta: { title: '商品管理', icon: 'table' }
+        meta: { title: '商品管理', icon: 'table' },
+        children: [
+          {
+            path: 'add',
+            hidden: true,
+            name: 'ProductAddForm',
+            component: () => import('@/views/product/child/add'),
+            meta: { title: '添加商品', icon: 'form' }
+          }
+        ]
       },
       {
         path: 'orders',

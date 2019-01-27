@@ -1,20 +1,30 @@
 <!-- detail.vue -->
 <template>
-  <el-dialog :visible.sync="visible" :before-close="modalClose" title="终端信息" >
+  <el-dialog :visible.sync="visible" :before-close="modalClose" title="查看门店" >
     <el-form ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="型号" prop="id">
-        {{ formObj.id }}
+      <el-form-item label="门店号" prop="short">
+        {{ formObj.short }}
       </el-form-item>
-      <el-form-item label="终端图" prop="image">
-        <img v-if="formObj.image" :src="formObj.image" class="avatar">
-      </el-form-item>
-
-      <el-form-item label="终端名称" prop="title">
+      <el-form-item label="门店名称" prop="title">
         {{ formObj.title }}
       </el-form-item>
-
-      <el-form-item label="功能描述" prop="content">
+      <el-form-item label="联系人" prop="person">
+        {{ formObj.person }}
+      </el-form-item>
+      <el-form-item label="联系电话" prop="num">
+        {{ formObj.num }}
+      </el-form-item>
+      <el-form-item label="BD负责人" prop="person">
+        {{ formObj.person }}
+      </el-form-item>
+      <el-form-item label="所在城市" prop="city">
+        {{ formObj.city }}
+      </el-form-item>
+      <el-form-item label="门店地址" prop="content">
         <p>{{ formObj.content }}</p>
+      </el-form-item>
+      <el-form-item label="门店二维码" prop="image">
+        <img v-if="formObj.image" :src="formObj.image" class="avatar">
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
