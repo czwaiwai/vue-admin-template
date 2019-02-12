@@ -56,7 +56,7 @@
           <span>{{ scope.row.createTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="280" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="380" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="linkHandle(scope.row)" >关联门店</el-button>
           <el-button type="primary" size="mini" @click="showShopHandle(scope.row)" >查看门店</el-button>
